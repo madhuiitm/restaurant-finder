@@ -1,0 +1,39 @@
+<div *ngIf="restaurantDetail">
+  <ul>
+    <img class="featuredImage" src="{{restaurantDetail.featured_image}}"><br>
+   {{restaurantDetail.name}}<br>
+   {{restaurantDetail.user_rating.aggregate_rating}}({{restaurantDetail.user_rating.votes}} Votes) |
+    {{reviewList.reviews_count}} Reviews  <button class="button button-like" (click)="doLike(restaurantDetail.id)" [class.liked]="isClicked">
+      <i class="fa fa-heart"></i>
+      <span>Like</span>
+    </button>
+    </ul>
+    <ul>
+      <label>Cost for 2:</label><br>
+      Rs.{{restaurantDetail.average_cost_for_two}}
+    </ul>
+    <ul>
+      <label> Address: </label><br>
+      {{restaurantDetail.location.address}}
+    </ul>
+    <ul>
+      <label> Photos: </label><br>
+      <a href="{{restaurantDetail.photos_url}}">Photos</a>
+    </ul>
+    <ul>
+      <label> Menu: </label>
+      <a href="{{restaurantDetail.menu_url}}">Menu</a>
+    </ul>
+    <table  [mfData]="review" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <tr>
+      <th>Ratings: </th></tr>
+      <tbody>
+     <tr *ngFor="let review of mf.data"> 
+      <td> <img class="userImage" src="{{review.review.user.profile_image}}"></td>
+      <td> {{review.review.user.name}} <br>
+      {{review.review.review_text}}</td>
+     </tr>
+     </tbody> 
+     <a routerLink="/reviews">more...</a>
+  </table>
+</div>

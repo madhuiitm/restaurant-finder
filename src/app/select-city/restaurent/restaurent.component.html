@@ -1,0 +1,28 @@
+<div *ngIf="list"><h3 class="heading">Showing restaurants in "{{list.location.title}}"</h3></div>
+<table class="table" [mfData]="restaurants" #mf="mfDataTable" [mfRowsOnPage]="5" >
+        <!-- <thead>
+          <tr>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead> -->
+        <tbody *ngFor="let restaurant of mf.data" class="item-body" >
+          <tr >
+            <td rowspan="2"><img class="featuredImage" src="{{restaurant.restaurant.thumb}}"></td>
+            <td colspan="2" (click)="getRestaurantDetails(restaurant.restaurant.id)">{{restaurant.restaurant.name}}</td>
+            
+          </tr>
+          <tr class="pagination rating">
+              <td>  {{restaurant.restaurant.user_rating.aggregate_rating}}({{restaurant.restaurant.user_rating.votes}} Votes) |
+                    {{restaurant.restaurant.all_reviews_count}} Reviews
+              </td>
+          </tr>
+        </tbody>
+        <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+                </tfoot>
+      </table>
